@@ -20,5 +20,21 @@ Vagrant.configure('2') do |config|
     vb.memory = 2 * 1024 # This is denominated in MB, so 2GB
   end
 
-  # q.v. https://www.vagrantup.com/docs/provisioning/chef_solo.html
+  # For documentation on using Chef in Vagrant, see:
+  #   * https://www.vagrantup.com/docs/provisioning/chef_solo.html
+  #   * https://www.vagrantup.com/docs/provisioning/chef_common.html
+  config.vm.provision :chef_solo do |chef|
+    # Vagrant will install and manage the Chef client.
+    #chef.install = true       # Default value
+    #chef.channel = :stable    # Default value
+    #chef.version = :latest    # Default value
+
+    basedir = 'devops/provisioning/chef'
+    chef.cookbooks_path = "#{basedir}/cookbooks"
+    chef.roles_path = "#{basedir}/roles"
+
+    #chef.add_role "some_role"
+    chef.add_recipe "acme::default"
+    #chef.add_recipe "build-essential::default"
+  end
 end

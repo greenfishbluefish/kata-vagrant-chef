@@ -1,4 +1,4 @@
-# Devops kata to learn Vagrant (with Linux)
+# Devops Kata to learn Chef
 
 Devops kata to learn Chef with Vagrant
 
@@ -8,7 +8,10 @@ You have to:
 
 * Install Vagrant (https://www.vagrantup.com/docs/installation/)
 * Install Virtualbox (https://www.virtualbox.org/wiki/Downloads)
-* To clone this repository
+* Install ChefDK (https://downloads.chef.io/chefdk)
+* Install the `vagrant-berkshelf` plugin
+    * `vagrant plugin install vagrant-berkshelf`
+* Clone this repository
     * Install Git (https://git-scm.com/downloads)
     * On Windows, install from git-scm.com - other clients may not be up-to-date
 * To run the tests:
@@ -18,6 +21,8 @@ You have to:
     * Install Bundler
         * `gem install bundler`
         * Do **NOT** install Bundler globally or with `sudo`.
+    * Install the Ruby package dependencies
+        * `bundle install`
 
 ## Virtualbox and Windows 8/10
 
@@ -51,21 +56,30 @@ Current machine states:
 default                   not created (virtualbox)
 ```
 1. (Host) Bring the VM up with `vagrant up`
+    * You will see a lot of green text. About 15 lines from the bottom, you will
+      see something that looks like:
+```
+==> default: * execute[say hello] action run
+==> default:     [execute] 
+==> default: Hello
+==> default: [2017-04-25T20:25:11+00:00] INFO: execute[say hello] ran successfully
+```
 1. (Host) Log onto the VM with `vagrant ssh` and walk around, take a look.
-    * (Guest) There is a folder `/vagrant`. This is a shared folder that is linked
-      to the folder on the host machine which contains the Vagrantfile.
+    * (Guest) There is a folder `/vagrant`. This is a shared folder that is
+      linked to the folder on the host machine which contains the Vagrantfile.
 1. (Host) Run the acceptance tests with `bundle exec rake spec`
     * The tests will bring up the VM if it's not up yet.
     * You will see a number of failures. These are what you're going to work on.
 1. (Guest) Manually fix the failures.
+    * If you've done the [previous kata](https://github.com/greenfishbluefish/kata-vagrant-linux), you can skip this step and the next step.
     * (Host) Re-run the tests (in another terminal) until they pass.
     * (Guest) For example, `sudo groupadd acme` to fix the first failure.
 1. (Host) Once all the tests pass, destroy the VM with `vagrant destroy`
     * We're going to recreate it shortly.
 1. (Host) Run the tests again.
     * This time, instead of making the tests pass manually, you will use the
-      provided Chef scaffolding in `devops/provisioning/scripts`.
-    * As you add each command, run `vagrant provision` to have them run against
+      provided Chef scaffolding in `devops/provisioning/chef`.
+    * As you add each resource, run `vagrant provision` to have them run against
       the VM. Read the below section on Idempotency for how to write them.
 
 If you get stuck, I've created an "answer" branch with how I would solve this
