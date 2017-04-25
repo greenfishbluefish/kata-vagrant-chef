@@ -1,50 +1,20 @@
+# This entry prevents you from committing this directory. It contains the
+# details of a specific Vagrant VM.
+.vagrant
+
+# These entries are temp files for various editors.
+.*.sw? # VIm swap files.
+
+# In general, you will never want to check in these built Ruby artifacts. .gem
+# files are how Ruby libraries are distributed.
 *.gem
-*.rbc
-/.config
-/coverage/
-/InstalledFiles
-/pkg/
-/spec/reports/
-/spec/examples.txt
-/test/tmp/
-/test/version_tmp/
-/tmp/
 
-# Used by dotenv library to load environment variables.
-# .env
+# This directory is commonly used by several code coverage libraries (such as
+# Ruby's simplecov) for the results of a code coverage analysis.
+coverage
 
-## Specific to RubyMotion:
-.dat*
-.repl_history
-build/
-*.bridgesupport
-build-iPhoneOS/
-build-iPhoneSimulator/
-
-## Specific to RubyMotion (use of CocoaPods):
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# vendor/Pods/
-
-## Documentation cache and generated files:
-/.yardoc/
-/_yardoc/
-/doc/
-/rdoc/
-
-## Environment normalization:
-/.bundle/
-/vendor/bundle
-/lib/bundler/man/
-
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
+# Many naive .gitignore files which have Ruby dependencies will also ignore this
+# file. In general, you *want* to have this file so that every time a developer
+# does "bundle install", everyone will install the exact same version of every
+# dependency. We will check the Gemfile.lock file in.
+#Gemfile.lock
