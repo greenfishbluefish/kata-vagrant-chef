@@ -24,3 +24,4 @@ version '0.0.1'
 #
 # https://supermarket.chef.io/cookbooks/apache2
 depends 'apache2'
+depends 'hostsfile'

@@ -92,7 +92,10 @@ Vagrant.configure('2') do |config|
     # Look at devops/provisioning/chef/cookbooks/acme/recipes/default.rb
     #
     # https://docs.chef.io/recipes.html
-    chef.add_recipe "acme::default"
+    #
+    # answer:
+    # Don't use a recipe directly from the Vagrantfile. This is now in the role.
+    # chef.add_recipe "acme::default"
 
     # Roles provide a way of grouping recipes together for a specific purpose.
     # While cookbooks are often generic and can be reused across organizations,
@@ -105,7 +108,11 @@ Vagrant.configure('2') do |config|
 
     # Roles don't have namespaces like cookbooks and recipes. Instead, they're
     # just a single name.
-    chef.add_role "example"
+    #
+    # answer:
+    # Use a role specific to the task at hand. The example role hasn't been
+    # removed, but it's no longer used.
+    chef.add_role "acme"
 
     # We can specify specific configuration for use within the Vagrant
     # environment. For example, this is usually a developer's environment, so

@@ -5,4 +5,6 @@ DEPENDENCIES
 GRAPH
   acme (0.0.1)
     apache2 (>= 0.0.0)
+    hostsfile (>= 0.0.0)
   apache2 (3.3.0)
+  hostsfile (2.4.5)
