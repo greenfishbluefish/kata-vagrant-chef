@@ -4,8 +4,24 @@
 # This is a Ruby script, with all the capabilities of Ruby. The first two lines,
 # or "modelines", set the syntax highlighting for emacs and vim.
 
+# Vagrantfiles are just Ruby scripts, so you can define functions and use all
+# the other Ruby capabilities. In this case, a function to ensure that all users
+# of this Vagrantfile have the necessary plugins installed.
+def require_plugin(name, version='>= 0')
+  unless Vagrant.has_plugin?(name, version)
+    puts "'#{name}' is not installed!"
+    puts ''
+    puts "to install:\nvagrant plugin install #{name}"
+
+    # exit with extreme urgency, skipping a redundant error message and Vagrant politeness
+    exit! 1
+  end
+end
+
 # Specify a minimum Vagrant version everyone using this Vagrantfile must use.
 Vagrant.require_version('>= 1.9.0')
+
+require_plugin 'vagrant-berkshelf'
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (Vagrant supports older styles for
@@ -31,6 +47,11 @@ Vagrant.configure('2') do |config|
     vb.cpus = 1
     vb.memory = 2 * 1024 # This is denominated in MB, so 2GB
   end
+
+  # This line enables the Vagrant-Berkshelf integration.
+  #
+  # https://supermarket.chef.io/tools/vagrant-berkshelf
+  config.berkshelf.enabled = true
 
   # This is a provisioner block. It defines a step to take when modifying a VM
   # from its initial boot-up state to something that is "fit for purpose." The

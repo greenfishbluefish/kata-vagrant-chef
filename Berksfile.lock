@@ -1,0 +1,8 @@
+DEPENDENCIES
+  acme
+    path: devops/provisioning/chef/cookbooks/acme
+
+GRAPH
+  acme (0.0.1)
+    apache2 (>= 0.0.0)
+  apache2 (3.3.0)

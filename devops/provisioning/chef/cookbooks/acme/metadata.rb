@@ -15,10 +15,12 @@ name 'acme'
 description "The cookbook for provisioning ACME Corporation's web application"
 
 # The version is primarily used if this cookbook is consumed by other cookbooks.
-# If that's not the case, then leaving it at 0.0.1 is fine.
+# If that's not the case, then leaving it at 0.0.1 or omitting it is fine.
 version '0.0.1'
 
 # As you want to depend on cookbooks available in the Chef Supermarket, you add
 # them here. When Berkshelf runs, it ensures these cookbooks are available to
-# you.
-# depends 'other_cookbook', '~> 1.2.3'
+# you. I've added a dependency on the Apache2 cookbook to start you off.
+#
+# https://supermarket.chef.io/cookbooks/apache2
+depends 'apache2'
